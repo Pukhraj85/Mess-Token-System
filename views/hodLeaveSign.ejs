@@ -1,0 +1,64 @@
+<% include ./partial/header %><% include ./partial/hodfunction %>
+<div
+  class="col-sm-6"
+  style="    flex: 0 0 50%;
+    max-width: 50%;
+    margin-left: 551px;
+    margin-top:50px;  text-align: -webkit-center;"
+>
+  <table
+    class="content-table"
+    style="margin: auto; box-shadow: 0 0 20px rgba(0,0,0,0.15);"
+  >
+    <tr
+      style="background-color: rgb(9, 1, 19); border-radius: 5px 5px 0 0;  color: #ffffff;text-align: left; font-weight: bold;"
+    >
+      <th>Student Name</th>
+      <th>More</th>
+      <th>Leaves total</th>
+      <!-- <th>
+        From
+      </th>
+      <th>To</th>
+      <th>Days</th>
+      <th>Status</th> -->
+    </tr>
+    <%students.forEach(function(student){%> 
+      <% if(student.leaves.length>0){%>
+    <tr>
+      <% var cnt=0 %>
+      <% var p=0 %>
+      <th><%=student.name%></th>
+      <%student.leaves.forEach(function(leave){%>
+        <%if(leave.status==="approved"){%>
+          <%cnt++%>
+        <%}%>
+          
+        <%if(leave.status==="pending" && p==0){%>
+            <td>
+            <a
+            href="/hod/<%=hod.id%>/leave/<%=student.id%>/info"
+            class="btn btn-block btn-success"
+            >New Leave</a>
+            </td>
+            <%p++%>
+        <%}%>      
+      <%})}%>
+      <%student.leaves.forEach(function(leave){%>
+          <%if(p==0){%>
+            <td>
+            <a
+            href="/hod/<%=hod.id%>/leave/<%=student.id%>/info"
+            class="btn btn-block btn-success"
+            >More info</a>
+            </td>
+            <%p++%>
+          <%}%>      
+      <%})%>
+          <td ><%=cnt%></td>      
+    <%})%>
+          </tr>
+  </table>
+</div>
+
+
